@@ -6,8 +6,7 @@ import './projectsList.scss'
 
 const ProjectsList = () => {
     return (
-        <div className='projects-list__wrapper'>
-          <div className="projects-list">
+        <div className="projects-list">
             <div className="projects-list__header">
                 <div className="projects-list__header-title">
                     <span className="projects-list__header-title_main">Название проекта</span>
@@ -111,9 +110,6 @@ const ProjectsList = () => {
                 </li>
             </ul>
         </div>
-        <div className="projects-list__space"></div>
-        </div>
-      
     );
 };
 
