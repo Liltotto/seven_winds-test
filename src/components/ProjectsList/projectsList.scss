@@ -8,22 +8,33 @@
     //flex-direction: column;
     //gap: 62px;
 
-    &::after {
-        content: "";
-        position: absolute;
-        right: 0px;
-        /* Выравнивание границы по правому краю */
-        top: 0;
-        /* Начало границы сверху */
-        bottom: 0;
-        width: 1px;
-        /* Ширина границы */
-        //height: 100vh;
-        background-color: rgb(65, 65, 68);
-        /* Цвет границы */
+    // &::after {
+    //     content: "";
+    //     position: absolute;
+    //     right: 0px;
+    //     /* Выравнивание границы по правому краю */
+    //     top: 0;
+    //     /* Начало границы сверху */
+    //     bottom: 0;
+    //     width: 1px;
+    //     /* Ширина границы */
+    //     //height: 100vh;
+    //     background-color: rgb(65, 65, 68);
+    //     /* Цвет границы */
+    // }
+
+    border-right: 1px solid rgb(65, 65, 68);
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 62px;
     }
 
-    //border-right: 1px solid rgb(65, 65, 68);
+    &__space {
+        height: 100vh;
+        border-bottom: 1px solid rgb(65, 65, 68);
+    }
 
     &__header {
         display: flex;

@@ -1,7 +1,10 @@
 .main-section {
+    
+    background-color: rgb(32, 33, 36);
 
     &__title {
         display: flex;
+        background: rgb(39, 39, 42);
 
         &-item {
             white-space: nowrap;
@@ -53,14 +56,14 @@
 // }
 
 main {
-
+    // overflow-y:scroll;
     //width: 100%;
     max-width: 75%;
 
     .main-section__table {
         width: 100%;
         border-collapse: collapse;
-        margin: 12px 10px;
+        margin: 12px;
 
         th {
             padding: 0 12px;
@@ -70,19 +73,37 @@ main {
             //font-family: Roboto;
             font-size: 14px;
             font-weight: 400;
-            line-height: 130%;
-            letter-spacing: 0.1px;
+            //     line-height: 130%;
+            //    letter-spacing: 0.1px;
             text-align: left;
         }
 
         td {
             padding: 21px 12px;
+            //margin-right: 26px;
+            color: rgb(255, 255, 255);
+            //font-family: Roboto;
+            font-size: 14px;
+            font-weight: 400;
+            // line-height: 130%;
+            // letter-spacing: 0.1px;
+            text-align: left;
+
+            input {
+                width: 100%;
+                height: 36px;
+                padding: 10px;
+                border: 1px solid rgb(65, 65, 68);
+                border-radius: 6px;
+                background: rgba(0, 0, 0, 0);
+                color: rgb(113, 113, 122);
+            }
         }
 
         th,
         td {
             text-align: left;
-            border-bottom:  1px solid rgb(65, 65, 68);
+            border-bottom: 1px solid rgb(65, 65, 68);
         }
 
         tbody tr:last-child td {
@@ -93,11 +114,11 @@ main {
             padding-left: 20px;
         }
 
-        // th:nth-child(1),
-        // td:nth-child(1) {
-        //     width: 10%;
-        //     /* Установка ширины для первого столбца */
-        // }
+        
+        td:nth-child(1) {
+            padding-right: 38px;
+            /* Установка ширины для первого столбца */
+        }
 
         th:nth-child(2),
         td:nth-child(2) {
@@ -105,10 +126,119 @@ main {
             /* Установка ширины для второго столбца */
         }
 
-        th:not(:nth-child(1)):not(:nth-child(2))
-        td:not(:nth-child(1)):not(:nth-child(2)) {
+        th:not(:nth-child(1)):not(:nth-child(2)) td:not(:nth-child(1)):not(:nth-child(2)) {
             max-width: 200px;
             /* Установка ширины для четвертого столбца */
         }
     }
 }
+
+
+.buttons_container {
+    display: inline-flex;
+    padding: 6px 7px;
+
+    // display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &_active {
+        //color: rgb(255, 255, 255);
+        //vertical-align: middle;
+        border-radius: 6px;
+        background: rgb(65, 65, 68);
+        // background-color: rgb(161, 161, 170);
+    }
+
+    button {
+        cursor: pointer;
+        border: 0;
+        background-color: transparent;
+        height: 16px;
+        width: 16px;
+
+    }
+}
+
+// .main-section {
+//     padding: 20px;
+// }
+
+// .main-section__title {
+//     display: flex;
+//     align-items: center;
+//     margin-bottom: 20px;
+// }
+
+// .main-section__title-item {
+//     font-size: 24px;
+//     font-weight: bold;
+// }
+
+// .main-section__table {
+//     width: 100%;
+//     border-collapse: collapse;
+// }
+
+// .main-section__table th,
+// .main-section__table td {
+//     border: 1px solid #ccc;
+//     padding: 8px;
+//     text-align: left;
+// }
+
+// .hierarchy-cell {
+//     position: relative;
+//     //padding-left: 20px;
+// }
+
+// .hierarchy-line {
+//     position: absolute;
+//     top: 50%;
+//     left: 0;
+//     width: 20px;
+//     height: 1px;
+//     background: #ccc;
+// }
+
+// .cell-content {
+//     padding-left: 10px;
+// }
+
+// .level-2 .hierarchy-cell {
+//     padding-left: 40px;
+// }
+
+// .level-3 .hierarchy-cell {
+//     padding-left: 60px;
+// }
+
+// .level-4 .hierarchy-cell {
+//     padding-left: 80px;
+// }
+
+// .level-5 .hierarchy-cell {
+//     padding-left: 100px;
+// }
+
+// /* Дополнительные стили для линий */
+// .level-2 .hierarchy-line::before {
+//     content: '';
+//     position: absolute;
+//     top: -50%;
+//     left: 0;
+//     width: 1px;
+//     height: 50%;
+//     background: #ccc;
+// }
+
+// .level-2 .hierarchy-line::after {
+//     content: '';
+//     position: absolute;
+//     bottom: -50%;
+//     left: 0;
+//     width: 1px;
+//     height: 50%;
+//     background: #ccc;
+// }

@@ -1,6 +1,6 @@
-export interface IOutplay {
+export interface IOutlay {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    child: { [key: string]: any }[];
+    child: IOutlay[];
     equipmentCosts: number;
     estimatedProfit: number;
     id: number;
@@ -14,10 +14,25 @@ export interface IOutplay {
     supportCosts: number;
     total: number;
   }
+
+  export interface IOutlayCreate {
+    equipmentCosts: number
+    estimatedProfit: number
+    machineOperatorSalary: number
+    mainCosts: number
+    materials: number
+    mimExploitation: number
+    overheads: number
+    parentId: number
+    rowName: string
+    salary: number
+    supportCosts: number
+  }
+  
   
   export interface ICreateOutlayRowArgs {
     eID: number;
-    body: IOutplay;
+    body: IOutlayCreate;
   }
 
   export interface IUpdateOutlayRowArgs extends ICreateOutlayRowArgs {

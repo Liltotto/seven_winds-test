@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ICreateOutlayRowArgs, IDeleteOutlayRowArgs, IOutplay, IUpdateOutlayRowArgs } from "../models/IOutlay";
+import { ICreateOutlayRowArgs, IDeleteOutlayRowArgs, IOutlay, IUpdateOutlayRowArgs } from "../models/IOutlay";
 
 
 export const outlayAPI = createApi({
@@ -7,13 +7,13 @@ export const outlayAPI = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://185.244.172.108:8081/v1/outlay-rows/entity'}),
     tagTypes: ['OutlayRow'],
     endpoints: (build) => ({
-        getAllOutlayRows: build.query<IOutplay[], number>({
+        getAllOutlayRows: build.query<IOutlay[], number>({
             query: (eID) => ({
                 url: `/${eID}/row/list`,
             }),
             providesTags: ['OutlayRow']
         }),
-        createOutlayRow: build.mutation<IOutplay, ICreateOutlayRowArgs>({
+        createOutlayRow: build.mutation<IOutlay, ICreateOutlayRowArgs>({
             query: ({eID, body}) => ({
                 url: `/${eID}/row/create`,
                 method: 'POST',
@@ -21,7 +21,7 @@ export const outlayAPI = createApi({
             }),
             invalidatesTags: ['OutlayRow']
         }),
-        updateOutlayRow: build.mutation<IOutplay, IUpdateOutlayRowArgs>({
+        updateOutlayRow: build.mutation<IOutlay, IUpdateOutlayRowArgs>({
             query: ({eID, rID, body}) => ({
                 url: `/${eID}/row/${rID}/update`,
                 method: 'POST',
@@ -29,7 +29,7 @@ export const outlayAPI = createApi({
             }),
             invalidatesTags: ['OutlayRow']
         }),
-        deleteOutlayRow: build.mutation<IOutplay, IDeleteOutlayRowArgs>({
+        deleteOutlayRow: build.mutation<IOutlay, IDeleteOutlayRowArgs>({
             query: ({eID, rID}) => ({
                 url: `/${eID}/row/${rID}/delete`,
                 method: 'DELETE'
