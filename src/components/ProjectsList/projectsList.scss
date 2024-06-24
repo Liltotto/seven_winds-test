@@ -1,0 +1,107 @@
+.projects-list {
+
+    display: inline-block;
+    position: relative;
+    height: 100vh;
+    max-width: 15%;
+    //flex-shrink: 0;
+    //flex-direction: column;
+    //gap: 62px;
+
+    &::after {
+        content: "";
+        position: absolute;
+        right: 0px;
+        /* Выравнивание границы по правому краю */
+        top: 0;
+        /* Начало границы сверху */
+        bottom: 0;
+        width: 1px;
+        /* Ширина границы */
+        //height: 100vh;
+        background-color: rgb(65, 65, 68);
+        /* Цвет границы */
+    }
+
+    //border-right: 1px solid rgb(65, 65, 68);
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: 9px 8px 8px 20px;
+        gap: 62px;
+
+        border-bottom: 1px solid rgb(65, 65, 68);
+
+        &-title {
+            display: flex;
+            flex-direction: column;
+            //gap: 4px;
+            color: rgb(161, 161, 170);
+            white-space: nowrap;
+            &_main {
+                //color: rgb(161, 161, 170);
+                //font-family: Roboto;
+                font-size: 14px;
+                font-weight: 400;
+                line-height: 16px;
+                letter-spacing: 0%;
+                text-align: left;
+            }
+
+            &_submain {
+                //color: rgb(161, 161, 170);
+                //font-family: Roboto;
+                font-size: 10px;
+                font-weight: 400;
+                line-height: 12px;
+                letter-spacing: 0%;
+                text-align: left;
+            }
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        //gap: 8px;
+       
+        //border-bottom: 1px solid rgb(65, 65, 68); 
+
+
+    }
+
+    &__item {
+        display: flex;
+        //justify-content: flex-end;
+        align-items: center;
+        gap: 14px;
+        padding: 5px 0;
+        padding-left: 20px;
+        //color: rgb(161, 161, 170);
+        cursor: pointer;
+
+        &_active {
+            background-color: rgb(161, 161, 170);
+        }
+
+        &-img{
+            width: 22px;
+            height: 22px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        span {
+            color: rgb(255, 255, 255);
+            //font-family: Roboto;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0%;
+            text-align: left;
+        }
+    }
+}
