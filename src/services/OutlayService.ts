@@ -8,8 +8,8 @@ export const outlayAPI = createApi({
     tagTypes: ['OutlayRow'],
     endpoints: (build) => ({
         getAllOutlayRows: build.query<IOutlay[], number>({
-            query: () => ({
-                url: `/128694/row/list`,
+            query: (eID) => ({
+                url: `/${eID}/row/list`,
             }),
             providesTags: ['OutlayRow']
         }),
