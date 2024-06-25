@@ -9,7 +9,7 @@ export const outlayAPI = createApi({
     endpoints: (build) => ({
         getAllOutlayRows: build.query<IOutlay[], number>({
             query: (eID) => ({
-                url: `/${eID}/row/list`,
+                url: `/128694/row/list`,
             }),
             providesTags: ['OutlayRow']
         }),
