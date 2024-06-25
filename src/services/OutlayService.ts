@@ -4,7 +4,12 @@ import { ICreateOutlayRowArgs, IDeleteOutlayRowArgs, IOutlay, IUpdateOutlayRowAr
 
 export const outlayAPI = createApi({
     reducerPath: 'outlayAPI',
-    baseQuery: fetchBaseQuery({baseUrl: 'http://185.244.172.108:8081/v1/outlay-rows/entity/'}),
+    baseQuery: fetchBaseQuery({
+        baseUrl: 'http://185.244.172.108:8081/v1/outlay-rows/entity/',
+        prepareHeaders: (headers) => {
+            headers.set('Access-Control-Allow-Origin', '*');
+            return headers;
+          }}),
     tagTypes: ['OutlayRow'],
     endpoints: (build) => ({
         getAllOutlayRows: build.query<IOutlay[], number>({
