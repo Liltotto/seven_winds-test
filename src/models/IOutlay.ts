@@ -23,7 +23,7 @@ export interface IOutlay {
     materials: number
     mimExploitation: number
     overheads: number
-    parentId: number
+    parentId: number | null
     rowName: string
     salary: number
     supportCosts: number

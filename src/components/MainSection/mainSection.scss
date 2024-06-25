@@ -2,6 +2,7 @@
     
     background-color: rgb(32, 33, 36);
 
+    border-left: 1px solid rgb(65, 65, 68);
     &__title {
         display: flex;
         background: rgb(39, 39, 42);
@@ -56,7 +57,9 @@
 // }
 
 main {
-    // overflow-y:scroll;
+    // overflow-x: hidden;
+    // overflow-y: auto;
+    // max-height: 100vh;
     //width: 100%;
     max-width: 75%;
 
@@ -103,7 +106,9 @@ main {
         th,
         td {
             text-align: left;
+            white-space: nowrap;
             border-bottom: 1px solid rgb(65, 65, 68);
+            min-width: 100px;
         }
 
         tbody tr:last-child td {
@@ -128,6 +133,7 @@ main {
 
         th:not(:nth-child(1)):not(:nth-child(2)) td:not(:nth-child(1)):not(:nth-child(2)) {
             max-width: 200px;
+            
             /* Установка ширины для четвертого столбца */
         }
     }
