@@ -1,18 +1,15 @@
 import { Fragment } from 'react/jsx-runtime';
 import { outlayAPI } from '../../services/OutlayService';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { IOutlay, IOutlayCreate } from '../../models/IOutlay';
 
 import file from '/src/assets/file.svg'
 import trashcan from '/src/assets/trashcan.svg'
 
 import './mainSection.scss'
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
-import { IOutlay, IOutlayCreate } from '../../models/IOutlay';
 
 
-// interface IOutlayNewRow extends Partial<IOutlay> {
-//     parentId: number;
-//     level: number;
-// }
+
 
 interface IOutlayRow extends IOutlay, IOutlayCreate { }
 
@@ -33,28 +30,6 @@ const MainSection = () => {
     const [showEditor, setShowEditor] = useState(false);
     const [showEditorCurrentRow, setShowEditorCurrentRow] = useState<number>();
 
-    // const [newRow, setNewRow] = useState<IOutlayNewRow>({
-    //     parentId: 0,
-    //     level: 0,
-    //     rowName: '',
-    //     salary: 0,
-    //     equipmentCosts: 0,
-    //     overheads: 0,
-    //     estimatedProfit: 0
-    // });
-
-    //     const [localOutlayRows, setLocalOutlayRows] = useState<IOutlay[] | undefined>([]);
-
-    //    // const local_outlay_rows = JSON.parse( JSON.stringify(outlay_rows) );
-
-    //     useEffect(() => {
-    //         setLocalOutlayRows(outlay_rows)
-    //     }, [])
-
-    //     useEffect(() => {
-    //         setLocalOutlayRows(outlay_rows.)
-    //     }, [outlay_rows])
-
     const [formData, setFormData] = useState<IOutlayCreate>({
         equipmentCosts: 0,
         estimatedProfit: 0,
@@ -69,7 +44,7 @@ const MainSection = () => {
         supportCosts: 0
     });
 
-    const handleAddChild = (parentId: number, level: number) => {
+    const handleAddChild = (parentId: number) => {
         if (!parentId) {
             setShowEditor(false);
             return
@@ -77,7 +52,6 @@ const MainSection = () => {
 
         if (!showEditorCurrentRow) setShowEditor(true);
         setFormData({ ...formData, parentId });
-        // setNewRow({ ...newRow, parentId, level });
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -105,15 +79,6 @@ const MainSection = () => {
                     salary: 0,
                     supportCosts: 0
                 })
-                // setNewRow({
-                //     parentId: 0,
-                //     level: 0,
-                //     rowName: '',
-                //     salary: 0,
-                //     equipmentCosts: 0,
-                //     overheads: 0,
-                //     estimatedProfit: 0
-                // });
             });
         }
     };
@@ -146,29 +111,38 @@ const MainSection = () => {
     }
 
 
-    const Line = ({ level: level }: { level: number }) => {
+    const Line = () => {
         return (
             <div
                 style={{
                     position: 'absolute',
-                    //left: `${level * 40 + 20}px`,
-                    top: '82%',
+                    top: '81%',
                     left: '50%',
-                    //bottom: 0,
                     width: '1px',
-                    height: '60px',
+                    height: '64px',
                     backgroundColor: '#ccc',
-                    //transform: 'translateY(0)',
+                    transform: 'translate(-50%)',
                 }}
-            />
+            >
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '0',
+                        width: '13px',
+                        height: '1px',
+                        backgroundColor: '#ccc',
+                    }}
+                />
+            </div>
         );
     };
+
 
     const rowEditor = (row: IOutlayRow, level: number) => {
         return (
             <>
-                <td style={level ? { paddingLeft: `${level * 40}px` } : {}}>
-                    {row.child && row.child.length > 0 && <Line level={level} />}
+                <td style={level ? { paddingLeft: `${(level * 20) + 12}px` } : {}}>
                     {level_icon(row as IOutlayRow)}
                 </td>
                 <td>
@@ -223,8 +197,7 @@ const MainSection = () => {
     const renderNewRow = (row: IOutlayCreate, level = 0) => {
         return (
             <tr>
-                <td style={level ? { paddingLeft: `${level * 40}px` } : {}}>
-                {/* {row.child && row.child.length > 0 && <Line level={level} />} */}
+                <td style={level ? { paddingLeft: `${(level * 20) + 12}px` } : {}}>
                     {level_icon(row as IOutlayRow)}
                 </td>
                 <td>
@@ -280,20 +253,21 @@ const MainSection = () => {
 
     const level_icon = (row: IOutlayRow) => {
 
-        const level = findNestingLevel(row.id!, outlay_rows!) + 1;
-
         return (
             <div
                 className={`buttons_container ${showTrashcan ? 'buttons_container_active' : ''}`}
                 onMouseEnter={() => setShowTrashcan(true)}
                 onMouseLeave={() => setShowTrashcan(false)}>
-                
-                <button onClick={() => handleAddChild(row.id, findNestingLevel(row.id!, outlay_rows!) + 1)}>
-                     <div className='file_icon'>
-                        <img src={file} alt="file" /> 
-                        {row.child && row.child.length > 0 && <Line level={level} />}
+
+                <button onClick={() => handleAddChild(row.id)}>
+                    <div className="file_icon">
+                        <img src={file} alt="file" />
+                        {row.child && row.child.length > 0 && <Line />}
                     </div>
-            </button>
+
+
+
+                </button>
                 {showTrashcan && row.id && showEditorCurrentRow !== row.id && <button onClick={() => handleDeleteRow(row.id!)}><img src={trashcan} alt="trashcan" /></button>}
             </div>
         )
@@ -324,7 +298,7 @@ const MainSection = () => {
                 <tr onDoubleClick={() => handlerDoubleClick(row as IOutlayRow)}>
                     {row.id === showEditorCurrentRow ? rowEditor(row as IOutlayRow, level) :
                         <>
-                            <td style={level ? { paddingLeft: `${level * 40}px` } : {}}>{level_icon(row as IOutlayRow)}</td>
+                            <td style={level ? { paddingLeft: `${(level * 20) + 12}px` } : {}}>{level_icon(row as IOutlayRow)}</td>
                             <td>{row.rowName}</td>
                             <td>{row.salary}</td>
                             <td>{row.equipmentCosts}</td>
