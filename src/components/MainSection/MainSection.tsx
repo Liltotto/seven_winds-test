@@ -9,8 +9,6 @@ import trashcan from '/src/assets/trashcan.svg'
 import './mainSection.scss'
 
 
-
-
 interface IOutlayRow extends IOutlay, IOutlayCreate { }
 
 const MainSection = () => {
