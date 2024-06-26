@@ -120,6 +120,7 @@ const MainSection = () => {
                     height: '64px',
                     backgroundColor: '#ccc',
                     transform: 'translate(-50%)',
+                    pointerEvents: 'none',
                 }}
             >
                 <div
@@ -130,6 +131,7 @@ const MainSection = () => {
                         width: '13px',
                         height: '1px',
                         backgroundColor: '#ccc',
+                        pointerEvents: 'none',
                     }}
                 />
             </div>
