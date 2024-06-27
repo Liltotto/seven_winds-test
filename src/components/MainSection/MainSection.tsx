@@ -109,35 +109,38 @@ const MainSection = () => {
     }
 
 
-    const Line = () => {
+    const LineUnderFile = ({ height, top }: { height: number, top: number }) => {
         return (
             <div
                 style={{
                     position: 'absolute',
-                    top: '81%',
+                    top: `${top}%`,
                     left: '50%',
                     width: '1px',
-                    height: '64px',
+                    height: `${height}px`,
                     backgroundColor: '#ccc',
                     transform: 'translate(-50%)',
                     pointerEvents: 'none',
                 }}
-            >
-                <div
-                    style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: '0',
-                        width: '13px',
-                        height: '1px',
-                        backgroundColor: '#ccc',
-                        pointerEvents: 'none',
-                    }}
-                />
-            </div>
+            />
         );
     };
 
+    const LineBeforeFile = () => {
+        return (
+            <div
+                style={{
+                    position: 'absolute',
+                    top: '40%',
+                    left: '-78%',
+                    width: '12.5px',
+                    height: '1px',
+                    backgroundColor: '#ccc',
+                    pointerEvents: 'none',
+                }}
+            />
+        );
+    };
 
     const rowEditor = (row: IOutlayRow, level: number) => {
         return (
@@ -198,7 +201,7 @@ const MainSection = () => {
         return (
             <tr>
                 <td style={level ? { paddingLeft: `${(level * 20) + 12}px` } : {}}>
-                    {level_icon(row as IOutlayRow)}
+                    {level_icon(row as IOutlayRow, true)}
                 </td>
                 <td>
                     <input
@@ -249,9 +252,50 @@ const MainSection = () => {
     };
 
 
+    const isTopLevelObject = (arr : IOutlay[], objToCheck: IOutlay) => {
+        const topLevelIds = new Set(arr.map(obj => obj.id));
+
+        function traverse(obj: IOutlay) {
+            if (obj.child && obj.child.length > 0) {
+                obj.child.forEach(child => {
+                    topLevelIds.delete(child.id);
+                    traverse(child);
+                });
+            }
+        }
+
+        arr.forEach(obj => traverse(obj));
+
+        return topLevelIds.has(objToCheck.id);
+    }
+
+    const countItems = (parentItem : IOutlay) => {
+        let count = 0;
+      
+        for (let i = 0; i < parentItem.child.length; i++) {
+          if (i === parentItem.child.length - 1) {
+            return count + 1;
+          }
+          count += countAllItems(parentItem.child[i]);
+        }
+      
+        return count;
+      }
+      
+      function countAllItems(item: IOutlay) {
+        let count = 1;
+      
+        for (const child of item.child) {
+          count += countAllItems(child);
+        }
+      
+        return count;
+      }
 
 
-    const level_icon = (row: IOutlayRow) => {
+    const level_icon = (row: IOutlayRow, rowEditorStatus: boolean = false) => {
+
+        const isTopLevelRow = isTopLevelObject(outlay_rows!, row)
 
         return (
             <div
@@ -261,11 +305,13 @@ const MainSection = () => {
 
                 <button onClick={() => handleAddChild(row.id)}>
                     <div className="file_icon">
-                        <img src={file} alt="file" />
-                        {row.child && row.child.length > 0 && <Line />}
+                        <div className="background_img">
+                            <img src={file} alt="file" />
+                        </div>
+
+                        {!isTopLevelRow && !rowEditorStatus && <LineBeforeFile />}
+                        {row.child && row.child.length > 0 && <LineUnderFile height={countItems(row) * 73} top={40} />}
                     </div>
-
-
 
                 </button>
                 {showTrashcan && row.id && showEditorCurrentRow !== row.id && <button onClick={() => handleDeleteRow(row.id!)}><img src={trashcan} alt="trashcan" /></button>}
