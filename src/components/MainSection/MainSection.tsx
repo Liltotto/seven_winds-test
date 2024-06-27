@@ -106,6 +106,7 @@ const MainSection = () => {
 
     useEffect(() => {
         if(!outlay_rows?.length) setFormData({ ...formData, parentId: null })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [outlay_rows?.length])
 
     const handleDeleteRow = (rID: number) => {
