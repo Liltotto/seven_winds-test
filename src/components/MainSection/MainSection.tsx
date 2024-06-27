@@ -1,6 +1,6 @@
 import { Fragment } from 'react/jsx-runtime';
 import { outlayAPI } from '../../services/OutlayService';
-import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { IOutlay, IOutlayCreate } from '../../models/IOutlay';
 
 import file from '/src/assets/file.svg'
@@ -103,6 +103,10 @@ const MainSection = () => {
             })
         }
     }
+
+    useEffect(() => {
+        if(!outlay_rows?.length) setFormData({ ...formData, parentId: null })
+    }, [outlay_rows?.length])
 
     const handleDeleteRow = (rID: number) => {
         deleteOutlayRow({ eID, rID })
